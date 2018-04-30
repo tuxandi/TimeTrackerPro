@@ -1,35 +1,48 @@
 package de.asc.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * database wrapper
+ * 
+ * 
+ * @author andi
+ *
+ */
 public class Database {
+	private static String url = "jdbc:postgresql://localhost:5432/timetracker";
+    private static String userid = "time";
+    private static String password = "jonas";
 
-    public static void main(String[] args) {
-
-        String url = "jdbc:postgresql://localhost:5432/timetracker";
-        String user = "time";
-        String password = "jonas";
-
-        try (Connection con = DriverManager.getConnection(url, user, password);
-                Statement st = con.createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM users")) {
-
-            while (rs.next()) {
-                System.out.println(rs.getString(1));
-                System.out.println(rs.getString(2));
-               
-                //System.out.println(rs.getString(6));
-            }
-
-        } catch (SQLException ex) {
-        
-            Logger lgr = Logger.getLogger(Connect.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
+    private static Connection connection = null;
+    
+	/**
+     * 
+     * @throws SQLException
+     */
+    public static void connect() throws SQLException {
+    	if (connection == null)
+    		connection = DriverManager.getConnection(url, userid, password);
     }
+
+    /**
+     * 
+     * @throws SQLException
+     */
+    public static void disconnect() throws SQLException {
+    	if (connection != null)
+    		connection.close();
+    }
+
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
+    public static Connection getConnection() throws SQLException {
+    	connect();
+		return connection;
+	}
+    
 }
