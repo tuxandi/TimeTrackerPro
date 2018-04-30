@@ -36,7 +36,7 @@ public class Table {
 	/**
 	 * 
 	 */
-	public void buildFieldList() {
+	private void buildFieldList() {
 		Field[] fieldlist = this.getClass().getFields();
 		fields = Arrays.asList(fieldlist);
 	}
@@ -45,7 +45,7 @@ public class Table {
 	 * 
 	 * @return
 	 */
-	public void buildSelectStatement() {
+	private void buildSelectStatement() {
 		selectSql = "select ";
 		for (int i = 0; i < fields.size(); i++) {
 			if (i > 0)
