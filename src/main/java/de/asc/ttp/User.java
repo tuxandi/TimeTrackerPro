@@ -7,7 +7,8 @@ public class User extends Table {
 	public String lastname = null;
 	
 	public User() {
-		tablename = "USERS";
+		tablename = "users";
 		init();
+	
 	}
 }
