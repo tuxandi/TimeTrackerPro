@@ -12,7 +12,7 @@ public class UserTest  {
 	
 	
 	public static void main (String[] args){
-		Timeslices u = new Timeslices();
+		Mandants u = new Mandants();
 		System.out.println(u.toString());
 		
 		

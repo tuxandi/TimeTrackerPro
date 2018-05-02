@@ -1,11 +1,11 @@
 
 package de.asc.ttp;
-import de.asc.db.Table;
+import de.asc.db.InsertTable;
 /**
  * @author jonas
  *
  */
-public class Mandants extends Table {
+public class Mandants extends InsertTable {
 	public int mandantid;
 	public String name = null;
 	public String address = null;
