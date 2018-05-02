@@ -15,7 +15,7 @@ public class InsertTable extends Database {
 	private String insertSql = null;
 	private String selectSql = null;
 	private List<Field> fields = new ArrayList<Field>();
-	
+	private String insertValues = null;
 	public Integer id = null;
 	public String name = null;
 	
@@ -25,6 +25,7 @@ public class InsertTable extends Database {
 		buildFieldList();
 		buildSelectStatement();
 		buildInsertStatement();
+		buildValuesStatement();
 	}
 
 	private void buildFieldList() {
@@ -65,6 +66,28 @@ public class InsertTable extends Database {
 		}
 		insertSql += ") where id = "+id;
 	}
+	private void buildValuesStatement() {
+		insertValues = "VALUES(";
+		for (int i = 0; i < fields.size(); i++){
+			if (i > 0)
+				insertValues += ", ";
+			insertValues += fields.get(i).getName()+"=";
+			
+			try {
+				if (fields.get(i).getType().getName().equals("java.lang.Integer"))
+					insertValues +=fields.get(i).get(this);
+				else 
+					insertValues += "'"+ fields.get(i).getInt(this)+"'";
+				
+			}catch (IllegalArgumentException | IllegalAccessException e) {
+				insertValues += "''";
+				e.printStackTrace();
+			}
+		}
+		insertValues += ") where id = "+id;
+	}
+	
+	
 	public void setSelect (String selectSql) {
 		this.selectSql = selectSql;
 	}
