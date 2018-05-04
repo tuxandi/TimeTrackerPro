@@ -21,8 +21,8 @@ public class Table  extends Database{
 	private List<Field> fields = new ArrayList<Field>();
 	
 	
-	//public Integer id = null;
-	//public String name = null;
+	public Integer id = null;
+	public String name = null;
 	
 	
 	
@@ -49,14 +49,15 @@ public class Table  extends Database{
 	 * 
 	 * @return
 	 */
-	private void buildSelectStatement() {
+	private String buildSelectStatement() {
+		selectSql = buildSelectStatement();
 		selectSql = "select ";
 		for (int i = 0; i < fields.size(); i++) {
 			if (i > 0)
 				selectSql += ", ";
 			selectSql += fields.get(i).getName();
 		}
-		selectSql += " from "+tablename+" where id = 123";	
+		return selectSql += " from "+tablename+" where id = +id";	
 		
 	}
 
@@ -85,7 +86,7 @@ public class Table  extends Database{
 			}
 						
 		}
-		updateSql += ") where id = 123";	
+		updateSql += ") where id = "+id;	
 	}
 
 	
