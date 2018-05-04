@@ -15,7 +15,7 @@ public class InsertTable extends Database {
 	private String insertSql = null;
 	private String selectSql = null;
 	private List<Field> fields = new ArrayList<Field>();
-	private String insertValues = null;
+	private String insertValues;
 	public Integer id = null;
 	public String name = null;
 	
@@ -41,31 +41,37 @@ public class InsertTable extends Database {
 				selectSql += ", ";
 			selectSql += fields.get(i).getName();
 		}
-	selectSql += " from "+ tablename+" where id = "+id;
+	selectSql += " from "+ tablename+" where id =  "+id;
 	}
 
 	
 	
 	private void buildInsertStatement() {
+		String fieldlist = "";
+		String valueslist = "";
 		insertSql = "INSERT INTO "+ tablename +"(";
 		for (int i = 0; i < fields.size(); i++) {
-			if (i > 0)
-				insertSql += ", ";
-			insertSql += fields.get(i).getName()+"=";
-			
-			try { 
+			if (i > 0) {
+				fieldlist += ", ";
+				valueslist += ", ";
+			}
+			fieldlist += fields.get(i).getName();
+			valueslist += "?";
+
+			/*try { 
 				if (fields.get(i).getType().getName().equals("java.lang.Integer"))
-					insertSql +=fields.get(i).get(this);
+					valueslist +=fields.get(i).get(this);
 				else
-					insertSql += "'"+fields.get(i).get(this)+"'";
+					valueslist += "'"+fields.get(i).get(this)+"'";
 				
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				insertSql += "''";
+				valueslist += "''";
 				e.printStackTrace();
-			}
+			}*/
 		}
-		insertSql += ") where id = "+id;
+		insertSql += fieldlist + ") Values ("+ valueslist + ")" ;
 	}
+	
 	private void buildValuesStatement() {
 		insertValues = "VALUES(";
 		for (int i = 0; i < fields.size(); i++){
@@ -77,7 +83,7 @@ public class InsertTable extends Database {
 				if (fields.get(i).getType().getName().equals("java.lang.Integer"))
 					insertValues +=fields.get(i).get(this);
 				else 
-					insertValues += "'"+ fields.get(i).getInt(this)+"'";
+					insertValues += "'"+ fields.get(i).get(this)+"'";
 				
 			}catch (IllegalArgumentException | IllegalAccessException e) {
 				insertValues += "''";

@@ -15,7 +15,7 @@ public class Database {
     private static String userid = "time";
     private static String password = "jonas";
 
-    private static Connection connection = null;
+    protected static Connection connection = null;
     
 	/**
      * 
@@ -42,6 +42,7 @@ public class Database {
      */
     public static Connection getConnection() throws SQLException {
     	connect();
+    	System.out.println("Connect");
 		return connection;
 	}
     

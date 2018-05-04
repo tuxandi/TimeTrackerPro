@@ -6,7 +6,7 @@ import de.asc.db.InsertTable;
  *
  */
 public class Mandants extends InsertTable {
-	public int mandantid;
+	
 	public String name = null;
 	public String address = null;
 	public int zip;

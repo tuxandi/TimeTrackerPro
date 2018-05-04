@@ -21,8 +21,8 @@ public class Table  extends Database{
 	private List<Field> fields = new ArrayList<Field>();
 	
 	
-	public Integer id = null;
-	public String name = null;
+	//public Integer id = null;
+	//public String name = null;
 	
 	
 	
@@ -56,7 +56,7 @@ public class Table  extends Database{
 				selectSql += ", ";
 			selectSql += fields.get(i).getName();
 		}
-		selectSql += " from "+tablename+" where id = "+id;	
+		selectSql += " from "+tablename+" where id = 123";	
 		
 	}
 
@@ -85,29 +85,12 @@ public class Table  extends Database{
 			}
 						
 		}
-		updateSql += ") where id = "+id;	
+		updateSql += ") where id = 123";	
 	}
 
-	/**public void buildInsertStatement() {
-		insertSql = "INSERT " + tablename + "INTO (";
-		for (int i = 0; i < fields.size(); i++) {
-			if (i > 0)
-				insertSql += ", ";
-			insertSql += fields.get(i).getName()+"=";
-			
-			try { 
-				if (fields.get(i).getType().getName().equals("java.lang.Integer"))
-					insertSql += fields.get(i).get(this);
-				else
-					insertSql += "'"+fields.get(i).getInt(this)+ "'";
-			
-			}catch (IllegalArgumentException | IllegalAccessException e){
-					insertSql += "''";
-					e.printStackTrace();
-			}
-		}
-		insertSql += ") where id = "+id;
-	}/*
+	
+		
+	/*
  	/**
 	 * 
 	 * @param tablename

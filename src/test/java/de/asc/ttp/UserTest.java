@@ -1,18 +1,22 @@
 package de.asc.ttp;
 
-import de.asc.db.Table;
+import java.sql.SQLException;
 
-public class UserTest  {
+
+import de.asc.ttp.User;
+
+public class UserTest {
 	
 	
 	
-	public UserTest() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	public static void main (String[] args){
-		Mandants u = new Mandants();
+
+
+	public static void main (String[] args) throws SQLException{
+		
+		
+		
+		
+		User u = new User();
 		System.out.println(u.toString());
 		
 		
